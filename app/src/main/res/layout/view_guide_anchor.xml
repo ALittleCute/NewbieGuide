@@ -6,7 +6,6 @@
     <TextView
         android:layout_gravity="center"
         android:textColor="@android:color/white"
-        android:text="xml的的根局部定义成match_parent等同于anchorView的大小"
         android:layout_width="300dp"
         android:gravity="center"
         android:layout_height="wrap_content" />

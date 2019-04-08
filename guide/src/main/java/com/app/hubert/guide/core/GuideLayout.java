@@ -82,14 +82,15 @@ public class GuideLayout extends FrameLayout {
 
     private void setGuidePage(GuidePage page) {
         this.guidePage = page;
-        setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (guidePage.isEverywhereCancelable()) {
+        if (guidePage.isEverywhereCancelable()) {
+            setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     remove();
                 }
-            }
-        });
+            });
+        }
+
     }
 
     @Override
@@ -104,6 +105,17 @@ public class GuideLayout extends FrameLayout {
             case MotionEvent.ACTION_DOWN:
                 downX = event.getX();
                 downY = event.getY();
+                if (!guidePage.isEverywhereCancelable()) {//释放onClick事件
+                    List<HighLight> highLights1 = guidePage.getHighLights();
+                    for (HighLight highLight1 : highLights1) {
+                        RectF rectF = highLight1.getRectF((ViewGroup) getParent());
+                        if (rectF.contains(downX, downY)) {
+                            performClick();
+                            return false;
+                        }
+                    }
+                    remove();
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;
@@ -117,10 +129,14 @@ public class GuideLayout extends FrameLayout {
                         RectF rectF = highLight.getRectF((ViewGroup) getParent());
                         if (rectF.contains(upX, upY)) {
                             notifyClickListener(highLight);
-                            return true;
+                            return super.onTouchEvent(event);
                         }
                     }
                     performClick();
+                } else {
+                    if (guidePage.isEverywhereCancelable()) {
+                        remove();
+                    }
                 }
                 break;
 

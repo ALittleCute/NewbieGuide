@@ -64,7 +64,11 @@ public class GuidePage {
      * 添加需要高亮的view
      *
      * @param view          需要高亮的view
-     * @param shape         高亮形状{@link com.app.hubert.guide.model.HighLight.Shape}
+     * @par
+     *
+     *
+     * am shape         高亮形状{@link com.app.hubert.guide.model.HighLight.Shape}
+     *
      * @param round         圆角尺寸，单位dp，仅{@link com.app.hubert.guide.model.HighLight.Shape#ROUND_RECTANGLE}有效
      * @param padding       高亮相对view的padding,单位px
      * @param relativeGuide 相对于高亮的引导布局

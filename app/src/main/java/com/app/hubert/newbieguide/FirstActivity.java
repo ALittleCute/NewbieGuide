@@ -8,9 +8,12 @@ import android.graphics.RectF;
 import android.support.annotation.IntDef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class FirstActivity extends AppCompatActivity {
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.e("xiaojin","event.getAction() =="+event.getAction());
+        return super.onTouchEvent(event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +83,14 @@ public class FirstActivity extends AppCompatActivity {
         });
         //设置anchor 及 自定义绘制图形
         final View anchorView = findViewById(R.id.ll_anchor);
+        final LinearLayout ll_anchors = findViewById(R.id.ll_anchors);
         final Button btnAnchor = (Button) findViewById(R.id.btn_anchor);
+        findViewById(R.id.btn_anchor_1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(FirstActivity.this,"cwsa",Toast.LENGTH_LONG).show();
+            }
+        });
         btnAnchor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +103,7 @@ public class FirstActivity extends AppCompatActivity {
                                 paint.setStyle(Paint.Style.STROKE);
                                 paint.setStrokeWidth(10);
                                 paint.setPathEffect(new DashPathEffect(new float[]{20, 20}, 0));
-                                canvas.drawCircle(rectF.centerX(), rectF.centerY(), rectF.width() / 2 + 10, paint);
+                                canvas.drawRect(rectF.left,rectF.top,rectF.right,rectF.bottom,paint);
                             }
                         })
                         .build();
@@ -97,8 +112,8 @@ public class FirstActivity extends AppCompatActivity {
                         .anchor(anchorView)
                         .alwaysShow(true)//总是显示，调试时可以打开
                         .addGuidePage(GuidePage.newInstance()
-                                .addHighLightWithOptions(btnAnchor, HighLight.Shape.CIRCLE, options)
-                                .setLayoutRes(R.layout.view_guide_anchor))
+                                .addHighLightWithOptions(ll_anchors, HighLight.Shape.RECTANGLE, options)
+                                .setLayoutRes(R.layout.view_guide_anchor).setEverywhereCancelable(false))
                         .show();
             }
         });

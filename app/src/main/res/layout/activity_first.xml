@@ -17,18 +17,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="简单使用" />
-
+        <LinearLayout
+            android:id="@+id/ll_anchors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_anchor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="anchor" />
+            <Button
+                android:id="@+id/btn_anchor_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="anchor" />
+            <Button
+                android:id="@+id/btn_anchor_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="anchor" />
+        </LinearLayout>
         <Button
             android:id="@+id/btn_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="对话框形式" />
-
-        <Button
-            android:id="@+id/btn_anchor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="anchor" />
 
         <Button
             android:id="@+id/btn_listener"
